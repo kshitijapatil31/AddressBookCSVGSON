@@ -34,7 +34,7 @@ public static void writeData() {
  }
 public static void readData() {
 	 try {
-         Files.lines(new File("addressbooktxt.json").toPath())
+         Files.lines(new File("addressbookjson.json").toPath())
                  .forEach(System.out::println);
      }catch(IOException e) {
          e.printStackTrace();
