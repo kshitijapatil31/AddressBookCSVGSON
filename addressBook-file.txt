@@ -1,0 +1,3 @@
+AddressBook [firstName=kshitija, lastName=patil, address=Mirjole, city=Ratnagiri, state=Maharastra, zip=415639, phoneNo=8974562, emailId=patil@gmail.com]
+AddressBook [firstName=kshitija, lastName=patil, address=Mirjole, city=Ratnagiri, state=Maharastra, zip=415639, phoneNo=8974562, emailId=patil@gmail.com]
+AddressBook [firstName=kshitija, lastName=patil, address=Mirjole, city=Ratnagiri, state=Maharastra, zip=415639, phoneNo=8974562, emailId=patil@gmail.com]
