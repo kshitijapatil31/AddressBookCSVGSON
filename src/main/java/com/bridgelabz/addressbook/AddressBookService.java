@@ -8,11 +8,12 @@ public class AddressBookService {
 
 	public List<AddressBook> addressBookList;
 
+	private AddressBookDBConnection addressBookDBConnection;
 	public AddressBookService() {
-	
+		addressBookDBConnection=AddressBookDBConnection.getInstance();
 	}
-
 	public AddressBookService(List<AddressBook> addressBookList) {
+		this();
 		this.addressBookList = addressBookList;
 	}
 
@@ -76,6 +77,28 @@ public class AddressBookService {
 	
 		this.addressBookList=new AddressBookDBService().readData();
 		return this.addressBookList;
+	}
+
+	public void updateAddressBook(String firstName, String address) {
+		int result=new AddressBookDBService().updateAddressBookData(firstName,address);
+		if(result==0)
+			return;
+		AddressBook addressBook=this.getAddressBook(firstName);
+		if(addressBook !=null)
+			addressBook.phoneNumber=address;
+	}
+
+	private AddressBook getAddressBook(String firstName) {
+		
+		return this.addressBookList.stream()
+				.filter(n->n.firstName.equals(firstName))
+				.findFirst()
+				.orElse(null);
+	}
+
+	public boolean checkAddressBookSyncDB(String string) {
+		List<AddressBook> addressbookList=new AddressBookDBService().getAddressBook(string);
+		return addressbookList.get(0).equals(getAddressBook(string));
 	}
 
 	

@@ -3,11 +3,24 @@ package com.bridgelabz.addressbook;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Enumeration;
 
 public class AddressBookDBConnection {
+	
+	private static AddressBookDBConnection addressBookDBConnection;
+	private PreparedStatement addressBookDataStatement;
 	Connection con;
+	
+	
+	static AddressBookDBConnection getInstance() {
+		if(addressBookDBConnection==null) 
+			addressBookDBConnection=new AddressBookDBConnection();
+			return addressBookDBConnection;
+			
+		
+	}
 	public Connection dataBaseconnection(){
 		String driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/addressbook?useSSL=false";
