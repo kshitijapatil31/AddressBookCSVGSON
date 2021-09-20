@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbook;
 
 import java.util.List;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,7 +103,11 @@ public class AddressBookService {
 	}
 
 	
-
+	public List<AddressBook> readAddressBookDataDateRange(IOService ioService, Date startDate, Date endDate) {
+		 if (ioService.equals(IOService.DB_IO))
+		return new AddressBookDBService().getAddressBookForDateRange(startDate,endDate);
+		 return null;
+	}
 	
 
 }

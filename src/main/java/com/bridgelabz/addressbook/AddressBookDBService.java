@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook;
 
 import java.util.List;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,34 +16,8 @@ public class AddressBookDBService {
 	
 	public List<AddressBook> readData() {
 		String sql = "select * from addressBook";
-		List<AddressBook> addressBookList = new ArrayList<>();
-		try(Connection con = addressBook.dataBaseconnection()) {
-			
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-			addressBookList=this.getAddressBook(rs);
-			while (rs.next()) {
-				int id = rs.getInt("Id");
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
-				String type = rs.getString("type");
-				String address = rs.getString("address");
-				String city = rs.getString("city");
-				String state = rs.getString("state");
-				String phoneNo = rs.getString("phoneNumber");
-				String emailId = rs.getString("emailId");
 
-				System.out.println(firstName + " " + lastName + " " + type + " " + address + " " + city + " " + state
-						+ " " + phoneNo + " " + emailId);
-				addressBookList.add(new AddressBook(firstName , lastName ,type , address , city, state, phoneNo ,emailId));
-                 con.close();
-			
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return addressBookList;
+	    return this.getAddressBookDataUsingDB(sql);
 	}
 
 	public int updateAddressBookData(String firstName,String address) {
@@ -108,6 +83,28 @@ public class AddressBookDBService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public List<AddressBook> getAddressBookForDateRange(Date startDate, Date endDate) {
+		String sql=String.format("select * from addressbook where start between '%s' and '%s';",startDate,endDate);
+			
+
+	    return this.getAddressBookDataUsingDB(sql);
+	}
+
+	private List<AddressBook> getAddressBookDataUsingDB(String sql) {
+		List<AddressBook> addressBookList = new ArrayList<>();
+		try(Connection con = addressBook.dataBaseconnection()) {
+			
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			addressBookList=this.getAddressBook(rs);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return addressBookList;
 	}
 
 	
