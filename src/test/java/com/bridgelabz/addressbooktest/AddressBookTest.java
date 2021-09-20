@@ -19,11 +19,11 @@ public class AddressBookTest {
 	public void givenEmployeeWhenWrittenToFileShouldMatchEmployeeEntries() {
 		AddressBook[] arrayOfEmps = {
 				new AddressBook("kshitija", "patil", "Mirjole", "Ratnagiri", "Maharastra", 415639, "8974562",
-						"patil@gmail.com"),
+						"patil@gmail.com","2018-01-01"),
 				new AddressBook("kshitija", "patil", "Mirjole", "Ratnagiri", "Maharastra", 415639, "8974562",
-						"patil@gmail.com"),
+						"patil@gmail.com","2019-6-09"),
 				new AddressBook("kshitija", "patil", "Mirjole", "Ratnagiri", "Maharastra", 415639, "8974562",
-						"patil@gmail.com"), };
+						"patil@gmail.com","2020-08-11"), };
 
 		addressBookService = new AddressBookService(Arrays.asList(arrayOfEmps));
 		addressBookService.writeEmployeePayrollData(IOService.FILE_IO);
@@ -58,5 +58,13 @@ public class AddressBookTest {
 		List<AddressBook> addressBook = addressBookService.readAddressBookDataDateRange(IOService.DB_IO, startDate,
 				endDate);
 		Assert.assertEquals(2, addressBook.size());
+	}
+	@Test
+	public void givenAddressBookForPerson_Whenadded_ShouldSyncWithhDB() {
+		addressBookService = new AddressBookService();
+		addressBookService.readAddressBookData(IOService.DB_IO);
+		addressBookService.addAddressBookData("Madhavi","patil","Mirjole","Ratnagiri","maha",415236,"7456987","madhavi@gm.com","2021-04-27");
+		boolean result = addressBookService.checkAddressBookSyncDB("Madhavi");
+		Assert.assertTrue(result);
 	}
 }

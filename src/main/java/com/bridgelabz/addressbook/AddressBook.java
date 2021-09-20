@@ -14,13 +14,13 @@ public class AddressBook {
 	Object zip;
 	String phoneNumber;
 	String emailId;
-	
+	String date;
 	public AddressBook() {
 		
 	}
 	
 	public AddressBook(String firstName, String lastName, String address, String city, String state, Object zip,
-			String phoneNo, String emailId) {
+			String phoneNo, String emailId,String date) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -30,13 +30,13 @@ public class AddressBook {
 		this.zip = zip;
 		this.phoneNumber = phoneNo;
 		this.emailId = emailId;
-		
+		this.date=date;
 	}
 	
 	
 	public AddressBook(String firstName,String lastName, String type, String address, String city, String state, Object zip,
-			String phoneNo, String emailId) {
-		this(firstName,lastName, address, city,  state,  zip, phoneNo,  emailId);
+			String phoneNo, String emailId,String date) {
+		this(firstName,lastName, address, city,  state,  zip, phoneNo,  emailId,date);
 		this.type = type;
 		
 	}
@@ -90,13 +90,16 @@ public class AddressBook {
 		this.emailId = emailId;
 	}
 
+	
+
+	
+
 	@Override
 	public String toString() {
 		return "AddressBook [lastName=" + lastName + ", type=" + type + ", address=" + address + ", city=" + city
-				+ ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNumber + ", emailId=" + emailId + "]";
+				+ ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + ", emailId=" + emailId
+				+ ", date=" + date + "]";
 	}
-
-	
 
 	@Override
 	public boolean equals(Object obj) {

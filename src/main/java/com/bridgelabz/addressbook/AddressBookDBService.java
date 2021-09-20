@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class AddressBookDBService {
-	AddressBookDBConnection addressBook = new AddressBookDBConnection();
+	static AddressBookDBConnection addressBook = new AddressBookDBConnection();
 	private  PreparedStatement addressBookDataStatement;
 	
 	
@@ -72,12 +72,13 @@ public class AddressBookDBService {
 				String address = rs.getString("address");
 				String city = rs.getString("city");
 				String state = rs.getString("state");
+				Object zip=rs.getObject("zip");
 				String phoneNo = rs.getString("phoneNumber");
 				String emailId = rs.getString("emailId");
-
+String date=rs.getString("start");
 				System.out.println(firstName + " " + lastName + " " + type + " " + address + " " + city + " " + state
 						+ " " + phoneNo + " " + emailId);
-				addressBookList.add(new AddressBook(firstName , lastName ,type , address , city, state, phoneNo ,emailId));
+				addressBookList.add(new AddressBook(firstName , lastName ,type , address , city, state,zip, phoneNo ,emailId,date));
 			}
 			}catch(SQLException e) {
 			e.printStackTrace();
@@ -105,6 +106,30 @@ public class AddressBookDBService {
 		}
 
 		return addressBookList;
+	}
+
+	public static AddressBook addAddressBookData(String firstname, String lastname, String address, String city,
+			String state, Object zip, String phonenumber, String emailId, String date) {
+		int id=-1;
+		AddressBook addressBookNo=null;
+		String sql=String.format("insert into addressbook (firstname, lastname,  address,  city,  state,  zip,  phonenumber,  emailId,  date)values('%s','%s','%s','%s','%s','%s','%s','%s','%s')",firstname, lastname,  address,  city,  state,  zip,  phonenumber,  emailId,  date);
+       try(Connection con = addressBook.dataBaseconnection()) {
+			
+			Statement stmt = con.createStatement();
+			int row=stmt.executeUpdate(sql,stmt.RETURN_GENERATED_KEYS);
+			
+			if(row==1)
+			{ResultSet rs = stmt.getGeneratedKeys();
+			if(rs.next())
+				id=rs.getInt(1);
+			}
+			addressBookNo=new AddressBook(firstname, lastname,  address,  city,  state,  zip,  phonenumber,  emailId,  date);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return addressBookNo;
 	}
 
 	

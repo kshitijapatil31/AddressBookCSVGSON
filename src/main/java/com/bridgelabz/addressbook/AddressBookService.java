@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class AddressBookService {
 
 	public List<AddressBook> addressBookList;
-
+	AddressBookDBService addressBookDBService;
 	private AddressBookDBConnection addressBookDBConnection;
 	public AddressBookService() {
 		addressBookDBConnection=AddressBookDBConnection.getInstance();
@@ -53,9 +53,9 @@ public class AddressBookService {
 		System.out.println("Enter the emailId");
 		String emailId = sc.next();
 
+		String date=sc.next();
 		employee.add(
-				new AddressBook(firstName, lastName, address, city, state, zip, phoneNo, emailId
-));
+				new AddressBook(firstName, lastName, address, city, state, zip, phoneNo, emailId,date));
 
 	}
 
@@ -107,6 +107,13 @@ public class AddressBookService {
 		 if (ioService.equals(IOService.DB_IO))
 		return new AddressBookDBService().getAddressBookForDateRange(startDate,endDate);
 		 return null;
+	}
+	
+	public void addAddressBookData(String firstname, String lastname, String address, String city, String state, Object zip,
+			String phonenumber, String emailId, String date) {
+		addressBookList.add(AddressBookDBService.addAddressBookData( firstname,  lastname,  address,  city,  state,  zip,
+			 phonenumber,  emailId,  date) );
+		
 	}
 	
 
