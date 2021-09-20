@@ -71,6 +71,13 @@ public class AddressBookService {
 			new AddressBookFileIOService().printData();
 	}
 
+	public List<AddressBook> readAddressBookData(IOService IOService) {
+		 if (IOService.equals(IOService.DB_IO))
+	
+		this.addressBookList=new AddressBookDBService().readData();
+		return this.addressBookList;
+	}
+
 	
 
 	

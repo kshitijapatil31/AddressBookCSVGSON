@@ -7,11 +7,12 @@ public class AddressBook {
 	
 	static String firstName;
 	String lastName;
+	String type;
 	String address;
 	String city;
 	String state;
 	Object zip;
-	String phoneNo;
+	String phoneNumber;
 	String emailId;
 	
 	public AddressBook() {
@@ -27,10 +28,19 @@ public class AddressBook {
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
-		this.phoneNo = phoneNo;
+		this.phoneNumber = phoneNo;
 		this.emailId = emailId;
 		
 	}
+	
+	
+	public AddressBook(String firstName,String lastName, String type, String address, String city, String state, Object zip,
+			String phoneNo, String emailId) {
+		this(firstName,lastName, address, city,  state,  zip, phoneNo,  emailId);
+		this.type = type;
+		
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -68,10 +78,10 @@ public class AddressBook {
 		this.zip = zip;
 	}
 	public String getPhoneNo() {
-		return phoneNo;
+		return phoneNumber;
 	}
 	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
+		this.phoneNumber = phoneNo;
 	}
 	public String getEmailId() {
 		return emailId;
@@ -82,9 +92,65 @@ public class AddressBook {
 
 	@Override
 	public String toString() {
-		return "AddressBook [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
-				+ city + ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", emailId=" + emailId + "]";
+		return "AddressBook [lastName=" + lastName + ", type=" + type + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNumber + ", emailId=" + emailId + "]";
 	}
+
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AddressBook other = (AddressBook) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (emailId == null) {
+			if (other.emailId != null)
+				return false;
+		} else if (!emailId.equals(other.emailId))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		} else if (!phoneNumber.equals(other.phoneNumber))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (zip == null) {
+			if (other.zip != null)
+				return false;
+		} else if (!zip.equals(other.zip))
+			return false;
+		return true;
+	}
+
+	
 
 	
 
